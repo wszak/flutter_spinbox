@@ -231,6 +231,14 @@ void testInput<S>(TestBuilder builder) {
       expect(tester.state(find.byType(S)), hasValue(21));
       expect(find.editableText, hasNoSelection);
       expect(find.editableText, hasText('21'));
+
+      tester.testTextInput.enterText('000');
+      await tester.idle();
+      await tester.tap(find.byIcon(TestIcons.increment));
+      await tester.pumpAndSettle();
+      expect(tester.state(find.byType(S)), hasValue(1));
+      expect(find.editableText, hasNoSelection);
+      expect(find.editableText, hasText('1'));
     });
 
     testWidgets('submit', (tester) async {

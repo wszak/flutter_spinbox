@@ -141,8 +141,8 @@ mixin SpinBoxMixin<T extends BaseSpinBox> on State<T> {
     _controller.value = _controller.value.copyWith(
       text: text,
       selection: selection.copyWith(
-        baseOffset: selection.baseOffset - oldOffset + newOffset,
-        extentOffset: selection.extentOffset - oldOffset + newOffset,
+        baseOffset: (selection.baseOffset - oldOffset + newOffset).clamp(0, text.length),
+        extentOffset: (selection.extentOffset - oldOffset + newOffset).clamp(0, text.length),
       ),
     );
   }
